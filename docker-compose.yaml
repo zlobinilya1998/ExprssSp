@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    image: node:18
+    working_dir: /app
+    container_name: backend
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    restart: always
+    command: sh -c "npm install && npm start"
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://194.135.25.94:3000
+    environment:
+      - VITE_API_URL=http://194.135.25.94:3000
+    container_name: frontend
+    restart: always
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3666:80"
+    depends_on:
+      - backend
+networks:
+  default:
+    name: app-network

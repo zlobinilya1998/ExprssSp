@@ -1,0 +1,9 @@
+config:
+  target: "http://localhost:3000" # URL вашего приложения
+  phases:
+    - duration: 60     # Длительность теста в секундах
+      arrivalRate: 100  # Количество новых пользователей в секунду
+scenarios:
+  - flow:
+      - get:
+          url: "/customer" # Пример маршрута для теста
