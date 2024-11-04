@@ -1,8 +1,10 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '@/config';
+import Customer from 'model/customerModel';
 
 interface ProductAttributes {
   id: number;
+  customerId: number;
   name: string;
   price: number;
   description: string;
@@ -17,7 +19,7 @@ class Product extends Model<ProductAttributes, ProductCreationAttributes> implem
   public price!: number;
   public description!: string;
   public stock!: number;
-
+  public customerId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -44,6 +46,13 @@ Product.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    customerId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Customers', 
+        key: 'id'
+      }
+    }
   },
   {
     sequelize,
@@ -51,6 +60,10 @@ Product.init(
   }
 )
 
+
+Product.belongsTo(Customer, {
+  foreignKey: 'customerId',
+})
 
 
 export default Product;
