@@ -1,6 +1,8 @@
 import Redis from '@/config/redis';
 import Customer from '@/model/customerModel';
+import Order from '@/model/orderModel';
 import { CustomerService } from 'services/CustomerService';
+import OrderService from './OrderService';
 
 abstract class Queue {
     abstract addTask(key: QueueKey, data: unknown): Promise<void>;
@@ -11,6 +13,7 @@ abstract class Queue {
 
 export enum QueueKey {
     customerCreated = 'customerCreated',
+    orderCreated = 'orderCreated',
 }
 
 
@@ -45,10 +48,22 @@ class RedisQueueService implements Queue {
         }
     }
 
+    async dequeueOrderCreated() {
+        const task = await this.dequeueTask<Order>(QueueKey.orderCreated);
+        if (!task) return;
+        try {
+            await OrderService.sendCustomerEmail(task.order, task.product, task.customer)
+        } catch (err){
+            console.log('[Mailer] error: ', err);
+            this.addTask(QueueKey.orderCreated, task);
+        }
+    }
+
     async listenQueue() {
         console.log('Start listening queue...');
         setInterval(() => {
             this.dequeueCustomerCreated();
+            this.dequeueOrderCreated();
         }, 2_000)
     }
 }

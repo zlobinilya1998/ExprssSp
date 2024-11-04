@@ -1,4 +1,4 @@
-import ProductRepository from "@/repository/customer/ProductRepository";
+import ProductRepository from "@/repository/ProductRepository";
 
 export class ProductService {
 
@@ -12,6 +12,10 @@ export class ProductService {
 
     static async getByCustomerId(id){
         return ProductRepository.getByCustomer(id)
+    }
+
+    static async getById(id){
+        return ProductRepository.getById(id);
     }
 
     static async deleteAll() {

@@ -1,11 +1,15 @@
 import Customer from '@/model/customerModel';
 import { EmailService } from '@/services/EmailService';
-import CustomerRepository from '@/repository/customer/CustomerRepository';
+import CustomerRepository from '@/repository/CustomerRepository';
 
 export class CustomerService {
 
     static async getAll(){
         return CustomerRepository.getAll()
+    }
+
+    static async getById(id){
+        return CustomerRepository.getById(id);
     }
 
     static async deleteAll(){

@@ -1,4 +1,4 @@
-import CustomerRepository from "@/repository/customer/CustomerRepository";
+import CustomerRepository from "@/repository/CustomerRepository";
 import QueueService, { QueueKey } from "@/services/QueueService";
 
 export class CustomerFacade {

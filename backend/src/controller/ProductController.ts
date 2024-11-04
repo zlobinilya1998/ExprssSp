@@ -1,5 +1,5 @@
 import express from 'express';
-import { createProductDto } from '@/dto/product/ProductDto';
+import { createProductDto } from '@/dto/ProductDto';
 import { validate } from '@/middleware/ValidateDtoMiddleware';
 import { ProductService } from '@/services/ProductService';
 const router = express.Router();

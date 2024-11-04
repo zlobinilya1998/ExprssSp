@@ -1,6 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '@/config';
-import Product from 'model/productModel';
 
 interface CustomerAttributes {
   id: number;

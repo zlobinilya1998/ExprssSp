@@ -25,6 +25,10 @@ class ProductRepository {
         });
     }
 
+    static async getById(id){
+        return Product.findByPk(id)
+    }
+
     static async getByCustomer(id) {
         return Product.findAll({
             where: {

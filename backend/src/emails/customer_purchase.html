@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уведомление о продаже товара</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #1a73e8;
+        }
+        .item-details {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #888;
+        }
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Поздравляем! Ваш товар продан!</h2>
+        <p>Мы рады сообщить вам, что ваш товар был успешно куплен. Вот детали продажи:</p>
+        
+        <div class="item-details">
+            <p><strong>Название товара:</strong> {{productName}}</p>
+            <p><strong>Цена:</strong> {{productPrice}} руб.</p>
+        </div>
+
+        <p>Спасибо за то, что выбрали нашу платформу для продажи ваших товаров. Если у вас есть вопросы или нужна помощь, не стесняйтесь обращаться к нам!</p>
+    </div>
+
+</body>
+</html>
