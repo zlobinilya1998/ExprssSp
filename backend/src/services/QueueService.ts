@@ -13,30 +13,36 @@ export enum QueueKey {
     customerCreated = 'customerCreated',
 }
 
+
 class RedisQueueService implements Queue {
-    constructor(){
+    constructor() {
         this.listenQueue();
     }
     async addTask(key: QueueKey, data: unknown): Promise<void> {
         try {
             await Redis.lpush(key, JSON.stringify(data));
             console.log("Task added to queue:", data);
-        } catch (e){
+        } catch (e) {
             console.log("Task queue failed", data);
             console.error(e);
         }
     }
     async dequeueTask<T>(key: QueueKey): Promise<T | null> {
-        const task = await Redis.rpop(key);
+        let task = await Redis.rpop(key);
         if (!task) return null;
         console.log("Task processed from queue:", JSON.parse(task));
-        return JSON.parse(task);
+        const data: T = JSON.parse(task);
+        return data;
     }
     async dequeueCustomerCreated() {
-        const data = await this.dequeueTask<Customer>(QueueKey.customerCreated);
-        if (!data) return;
-        await CustomerService.sendWelcomeEmail(data);
-        console.log('Send email on:', data.email);
+        const customer = await this.dequeueTask<Customer>(QueueKey.customerCreated);
+        if (!customer) return;
+        try {
+            await CustomerService.sendWelcomeEmail(customer);
+        } catch (err){
+            console.log('[Mailer] error: ', err);
+            this.addTask(QueueKey.customerCreated, customer);
+        }
     }
 
     async listenQueue() {
