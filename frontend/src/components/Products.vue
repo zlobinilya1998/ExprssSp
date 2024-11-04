@@ -24,8 +24,23 @@ onMounted(() => {
 
 </script>
 
-<style>
-.products .product {
-    
+<style lang="scss">
+.products {
+    display: flex;
+    gap: 20px;
+    .product {
+        flex: 20%;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        &-description {
+            margin-top: auto;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 }
 </style>
