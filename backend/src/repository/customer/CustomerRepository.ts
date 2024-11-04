@@ -9,19 +9,23 @@ class CustomerRepository {
         return customer;
     }
     static async delete(id) {
-        const deleted = await Customer.destroy({
+        return await Customer.destroy({
             where: { id }
         })
-        if (deleted) return;
-        return new Error('Ошибка при удалении')
     }
     static async getAll() {
         return Customer.findAll();
     }
 
+    static async getById(id) {
+        return Customer.findByPk(id);
+    }
+
     static async deleteAll() {
         return Customer.destroy({ truncate: true });
     }
+
+    
 }
 
 export default CustomerRepository;

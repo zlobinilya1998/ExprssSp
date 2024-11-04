@@ -1,6 +1,6 @@
 import Redis from '@/config/redis';
 import Customer from '@/model/customerModel';
-import { CustomerService } from '@/services/CustomerService';
+import { CustomerService } from 'services/CustomerService';
 
 abstract class Queue {
     abstract addTask(key: QueueKey, data: unknown): Promise<void>;

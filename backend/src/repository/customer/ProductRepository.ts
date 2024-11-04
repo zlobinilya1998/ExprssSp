@@ -2,23 +2,17 @@ import Product from "@/model/productModel";
 import Customer from "@/model/customerModel";
 
 class ProductRepository {
-
     static async create({ name, description, price, stock, customerId }) {
-        const product = await Product.create({
+        return Product.create({
             name,
             description,
             price,
             stock,
             customerId,
         })
-        return product;
     }
     static async delete(id) {
-        const deleted = await Product.destroy({
-            where: { id }
-        })
-        if (deleted) return;
-        return new Error('Ошибка при удалении')
+        return Product.destroy({ where: { id } })
     }
     static async getAll() {
         return Product.findAll({

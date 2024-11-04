@@ -1,19 +1,19 @@
 import express from 'express';
-import { createCustomerDto } from '@/dto/customer/CustomerDto';
+import { createCustomerDto } from '@/dto/CustomerDto';
 import { validate } from '@/middleware/ValidateDtoMiddleware';
 import { CustomerFacade } from '@/facade/CustomerFacade';
-import CustomerRepository from '@/repository/customer/CustomerRepository';
-import { CustomerService } from '@/services/CustomerService';
+import { CustomerService } from 'services/CustomerService';
 import { promises as fs } from 'fs';
 import path from 'path';
+
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
-    const customers = await CustomerRepository.getAll();
+router.get('/', async (_, res) => {
+    const customers = await CustomerService.getAll();
     res.send(customers)
 })
 
-router.get('/activate?:id', async (req, res, next) => {
+router.get('/activate?:id', async (req, res) => {
     const { id } = req.query;
     if (!id) throw new Error("No id was provided")
     await CustomerService.activateCustomer(id);
@@ -28,15 +28,15 @@ router.post('/', validate(createCustomerDto), async (req, res) => {
     res.send(customer)
 })
 
-router.delete("/all", async (req, res) => {
-    await CustomerRepository.deleteAll();
+router.delete("/all", async (_, res) => {
+    await CustomerService.deleteAll();
     res.send({})
 })
 
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     if (!id) throw new Error('No id was provided')
-    const customer = await CustomerRepository.delete(id);
+    const customer = await CustomerService.deleteById(id);
     res.send(customer)
 })
 

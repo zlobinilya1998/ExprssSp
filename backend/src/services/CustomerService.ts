@@ -1,7 +1,21 @@
 import Customer from '@/model/customerModel';
 import { EmailService } from '@/services/EmailService';
+import CustomerRepository from '@/repository/customer/CustomerRepository';
 
 export class CustomerService {
+
+    static async getAll(){
+        return CustomerRepository.getAll()
+    }
+
+    static async deleteAll(){
+        return CustomerRepository.deleteAll();
+    }
+
+    static async deleteById(id){
+        return CustomerRepository.delete(id);
+    }
+
     static async sendWelcomeEmail(customer: Customer) {
         return EmailService.sendEmail({
             to: customer.email,
