@@ -1,6 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '@/config';
-import Customer from 'model/customerModel';
 
 interface ProductAttributes {
   id: number;
@@ -50,7 +49,7 @@ Product.init(
       type: DataTypes.INTEGER,
       references: {
         model: 'Customers', 
-        key: 'id'
+        key: 'id',
       }
     }
   },
@@ -60,10 +59,6 @@ Product.init(
   }
 )
 
-
-Product.belongsTo(Customer, {
-  foreignKey: 'customerId',
-})
 
 
 export default Product;

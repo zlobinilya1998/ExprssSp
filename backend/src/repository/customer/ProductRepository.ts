@@ -16,8 +16,10 @@ class ProductRepository {
     }
     static async getAll() {
         return Product.findAll({
+            attributes: { exclude: ['customerId'] },
             include: [{
                 model: Customer,
+                as: 'customer',
                 attributes: ['name', 'id'],
             }],
         });

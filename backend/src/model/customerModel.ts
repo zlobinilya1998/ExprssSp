@@ -1,5 +1,6 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '@/config';
+import Product from 'model/productModel';
 
 interface CustomerAttributes {
   id: number;
@@ -21,6 +22,8 @@ class Customer extends Model<CustomerAttributes, CustomerCreationAttributes> imp
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
+
+
 
 Customer.init(
   {
