@@ -8,7 +8,13 @@ export class CustomerService {
             templateName: 'welcome',
             subject: 'Добро пожаловать на платформу!',
             text: 'Welcome',
-            template: { name: customer.name},
+            template: { name: customer.name, activation: `http://localhost:3000/customer/activate?id=${customer.id}`},
         });
+    }
+    static async activateCustomer(id) {
+        const customer = await Customer.findByPk(id);
+        if (!customer) throw new Error("User not found")
+        customer.isActivated = true;
+        await customer.save();
     }
 }

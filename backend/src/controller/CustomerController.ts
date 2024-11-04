@@ -1,14 +1,25 @@
 import express from 'express';
-import { createCustomerDto } from '@/dto/CustomerDto';
+import { createCustomerDto } from '@/dto/customer/CustomerDto';
 import { validate } from '@/middleware/ValidateDtoMiddleware';
 import { CustomerFacade } from '@/facade/CustomerFacade';
 import CustomerRepository from '@/repository/customer/CustomerRepository';
-
+import { CustomerService } from '@/services/CustomerService';
+import { promises as fs } from 'fs';
+import path from 'path';
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     const customers = await CustomerRepository.getAll();
     res.send(customers)
+})
+
+router.get('/activate?:id', async (req, res, next) => {
+    const { id } = req.query;
+    if (!id) throw new Error("No id was provided")
+    await CustomerService.activateCustomer(id);
+    const htmlPath = path.resolve(`src/emails/customer_activated.html`);
+    const htmlTemplate = await fs.readFile(htmlPath, 'utf-8');
+    res.send(htmlTemplate);
 })
 
 router.post('/', validate(createCustomerDto), async (req, res) => {
@@ -17,7 +28,7 @@ router.post('/', validate(createCustomerDto), async (req, res) => {
     res.send(customer)
 })
 
-router.delete("/all", async (req,res) => {
+router.delete("/all", async (req, res) => {
     await CustomerRepository.deleteAll();
     res.send({})
 })

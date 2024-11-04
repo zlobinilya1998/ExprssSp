@@ -6,15 +6,17 @@ interface CustomerAttributes {
   name: string;
   phone: string;
   email: string;
+  isActivated: boolean;
 }
 
-interface CustomerCreationAttributes extends Optional<CustomerAttributes, 'id'> { }
+interface CustomerCreationAttributes extends Optional<CustomerAttributes, 'id' | 'isActivated'> { }
 
 class Customer extends Model<CustomerAttributes, CustomerCreationAttributes> implements CustomerAttributes {
   public id!: number;
   public name!: string;
   public email!: string;
   public phone!: string;
+  public isActivated!: boolean;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -39,6 +41,10 @@ Customer.init(
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    isActivated: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     }
   },
   {
