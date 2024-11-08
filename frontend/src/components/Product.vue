@@ -12,7 +12,6 @@
 import { Product } from '@/models/Product';
 import { computed } from 'vue';
 
-
 interface IProps {
     item: Product,
 }
@@ -24,6 +23,3 @@ const customerText = computed(() => `Продавец ${props.item.customer.name
 const priceText = computed(() => `${props.item.price} руб.`)
 
 </script>
-
-<style>
-</style>

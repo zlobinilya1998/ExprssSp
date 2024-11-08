@@ -8,19 +8,25 @@
 import { onMounted, ref } from 'vue';
 import Product from '@/components/Product.vue';
 import { ProductService } from '@/services/ProductService';
-import { Product as TProduct } from '@/models/Product';
+import { ProductList } from '@/models/Product';
 
+const { products } = useProducts();
 
-const products = ref<TProduct[]>([])
+function useProducts() {
+    const products = ref<ProductList>([])
 
-const getProducts = async () => {
-    products.value = await ProductService.getAll();
+    const getProducts = async () => {
+        products.value = await ProductService.getAll();
+    }
+
+    onMounted(() => {
+        getProducts();
+    })
+
+    return {
+        products,
+    }
 }
-
-
-onMounted(() => {
-    getProducts();
-})
 
 </script>
 
@@ -28,11 +34,13 @@ onMounted(() => {
 .products {
     display: flex;
     gap: 20px;
+
     .product {
         flex: 20%;
         text-align: left;
         display: flex;
         flex-direction: column;
+
         &-description {
             margin-top: auto;
             display: -webkit-box;

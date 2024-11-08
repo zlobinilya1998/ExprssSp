@@ -13,3 +13,5 @@ export type Product = {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export type ProductList = Product[]

@@ -25,4 +25,14 @@ export class ProductService {
     static async deleteById(id) {
         return ProductRepository.delete(id);
     }
+
+    static async decreaseProductStock(id){
+        const product = await ProductRepository.getById(id);
+        if (!product) throw new Error('Product not found');
+        if (product.stock <= 0) return;
+        product.stock -= 1;
+        await product.save();
+        return product;
+        
+    }
 }

@@ -3,6 +3,7 @@ import Customer from '@/model/customerModel';
 import Order from '@/model/orderModel';
 import { CustomerService } from 'services/CustomerService';
 import OrderService from './OrderService';
+import { ProductService } from './ProductService';
 
 abstract class Queue {
     abstract addTask(key: QueueKey, data: unknown): Promise<void>;
@@ -42,7 +43,7 @@ class RedisQueueService implements Queue {
         if (!customer) return;
         try {
             await CustomerService.sendWelcomeEmail(customer);
-        } catch (err){
+        } catch (err) {
             console.log('[Mailer] error: ', err);
             this.addTask(QueueKey.customerCreated, customer);
         }
@@ -52,10 +53,17 @@ class RedisQueueService implements Queue {
         const task = await this.dequeueTask<Order>(QueueKey.orderCreated);
         if (!task) return;
         try {
-            await OrderService.sendCustomerEmail(task.order, task.product, task.customer)
-        } catch (err){
+            await OrderService.sendCustomerEmail(task.order, task.product, task.customer);
+        } catch (err) {
             console.log('[Mailer] error: ', err);
             this.addTask(QueueKey.orderCreated, task);
+        }
+
+        try {
+            await ProductService.decreaseProductStock(task.product.id);
+        } catch (err) {
+            console.log(err);
+
         }
     }
 
