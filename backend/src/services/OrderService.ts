@@ -5,6 +5,10 @@ import OrderRepository from "@/repository/OrderRepository";
 import { EmailService } from "@/services/EmailService";
 
 class OrderService {
+    static async getAll() {
+        return OrderRepository.getAll()
+    }
+
     static async create(dto) {
         return OrderRepository.create(dto);
     }

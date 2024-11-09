@@ -5,7 +5,7 @@
         <div class="product-price" v-text="priceText" />
         <div class="product-stock" v-text="stockText" />
         <div class="product-customer" v-text="customerText" />
-        <button class="product-purchase" :disabled="isPurchaseDisabled" @click="purchase">в корзину</button>
+        <v-btn class="mt-4" :disabled="isPurchaseDisabled" @click="purchase">купить</v-btn>
     </div>
 </template>
 

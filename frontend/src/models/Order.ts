@@ -1,8 +1,14 @@
+import { Product } from "./Product";
+
+export enum OrderStatus {
+    Create = 'created',
+}
+
 export type Order = {
-    status: string;
+    status: OrderStatus;
     id: number;
     totalAmount: number;
-    productId: number;
+    product: Product;
     updatedAt: string;
     createdAt: string;
 }

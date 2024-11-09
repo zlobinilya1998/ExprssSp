@@ -8,8 +8,8 @@ function defineAssociations() {
         as: 'customer',
     })
     Order.belongsTo(Product, {
-        foreignKey: 'id',
-        as: 'order',
+        foreignKey: 'productId',
+        as: 'product',
     })
     Customer.hasMany(Product, {
         foreignKey: 'customerId',
