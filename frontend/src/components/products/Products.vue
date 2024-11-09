@@ -1,7 +1,7 @@
 <template>
     <Loader v-if="loading" />
     <div v-else class="products">
-        <Product v-for="item in products" :item="item" />
+        <Product v-for="item in sortedByStockProducts" :item="item" @purchase="getProducts"/>
     </div>
 </template>
 
@@ -10,7 +10,7 @@ import Product from '@/components/products/Product.vue';
 import { useProducts } from '@/components/products/composables/useProducts';
 import Loader from '@/components/shared/Loader.vue';
 
-const { loading, products } = useProducts();
+const { loading, sortedByStockProducts, getProducts } = useProducts();
 </script>
 
 <style lang="scss" scoped>

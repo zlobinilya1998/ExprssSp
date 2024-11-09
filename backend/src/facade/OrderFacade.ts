@@ -8,9 +8,11 @@ export class OrderFacade {
     static async createOrder(dto){
         const order = await OrderService.create(dto);
         const product = await ProductService.getById(order.productId);
-        if (!product) return;
+        if (product?.stock){
+            product.stock -= 1;
+            await product.save();
+        }
         const customer = await CustomerService.getById(product.customerId);
-        if (!customer) return;
         QueueService.addTask(QueueKey.orderCreated, {
             order,
             product,
