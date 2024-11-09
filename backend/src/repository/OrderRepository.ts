@@ -1,4 +1,4 @@
-import Order from "@/model/orderModel";
+import Order, { OrderStatus } from "@/model/orderModel";
 import Product from "@/model/productModel";
 
 class OrderRepository {
@@ -13,12 +13,22 @@ class OrderRepository {
                 attributes: {
                     exclude: ['stock']
                 }
-                
             }],
+            order: [['createdAt', 'DESC']]
         });
     }
-    static async create({ totalAmount,productId }) {
-        return Order.create({totalAmount,productId})
+    static async create({ totalAmount, productId }) {
+        return Order.create({ totalAmount, productId })
+    }
+
+    static async updateStatus({ id, status }) {
+        const order = await Order.findByPk(id);
+        if (!order) throw new Error('Заказ не найден')
+        order.set({
+            status
+        });
+        await order.save();
+        return order;
     }
 }
 

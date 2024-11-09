@@ -1,7 +1,10 @@
 import { Product } from "./Product";
 
 export enum OrderStatus {
-    Create = 'created',
+    Created = 'created',
+    Accepted = 'accepted',
+    InWork = 'inWork',
+    Completed = 'completed',
 }
 
 export type Order = {

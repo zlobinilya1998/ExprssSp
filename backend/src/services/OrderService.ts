@@ -13,6 +13,10 @@ class OrderService {
         return OrderRepository.create(dto);
     }
 
+    static async updateStatus(dto){
+        return OrderRepository.updateStatus(dto);
+    }
+
 
     static async sendCustomerEmail(order: Order, product: Product, customer: Customer) {
         return EmailService.sendEmail({

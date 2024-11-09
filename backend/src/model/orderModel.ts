@@ -1,7 +1,7 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '@/config';
 
-enum OrderStatus {
+export enum OrderStatus {
     created = 'created',
     accepted = 'accepted',
     inWork = 'inWork',

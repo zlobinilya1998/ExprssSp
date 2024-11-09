@@ -1,5 +1,5 @@
 import express from 'express';
-import { createOrderDto } from '@/dto/OrderDto';
+import { createOrderDto, updateOrderStatusDto } from '@/dto/OrderDto';
 import { validate } from '@/middleware/ValidateDtoMiddleware';
 import OrderService from '@/services/OrderService';
 import { OrderFacade } from '@/facade/OrderFacade';
@@ -14,6 +14,12 @@ router.get('/', async (req, res) => {
 router.post('/', validate(createOrderDto), async (req, res) => {
     const dto = req.body;
     const order = await OrderFacade.createOrder(dto);
+    res.send(order)
+})
+
+router.put('/updateStatus', validate(updateOrderStatusDto), async (req, res) => {
+    const dto = req.body;
+    const order = await OrderService.updateStatus(dto);
     res.send(order)
 })
 
