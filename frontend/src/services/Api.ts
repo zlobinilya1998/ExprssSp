@@ -10,7 +10,8 @@ const instance = axios.create({
 
 const responseInterceptor = (response: AxiosResponse) => {
   if (response.data.isSuccess === false) {
-    return Promise.reject(new Error('Запрос завершился неуспешно: isSuccess = false'));
+    const err = new Error('Запрос завершился неуспешно: isSuccess = false')
+    return Promise.reject(err);
   }
   return response.data;
 }

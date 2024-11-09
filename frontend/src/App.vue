@@ -1,7 +1,10 @@
 <template>
-  <Products/>
+  <div>
+    <Header/>
+    <RouterView/>
+  </div>
 </template>
 
 <script setup lang="ts">
-import Products from '@/components/Products.vue';
+import Header from '@/components/Header.vue';
 </script>
