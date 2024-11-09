@@ -1,11 +1,9 @@
 <template>
     <div class="customer">
-        <div>ID: {{ item.customer_id }}</div>
+        <div>ID: {{ item.id }}</div>
         <div>{{ item.name }}</div>
         <div>{{ item.email }}</div>
         <div>{{ item.phone }}</div>
-        <div>{{ item.loyalty_points }}</div>
-        <div>{{ item.address }}</div>
         <button @click="remove">Удалить</button>
     </div>
 </template>
@@ -25,7 +23,7 @@ interface IEmits {
 const props = defineProps<IProps>()
 const emit = defineEmits<IEmits>()
 const remove = async () => {
-    await CustomerService.remove(props.item.customer_id);
+    await CustomerService.remove(props.item);
     emit('remove');
 };
 

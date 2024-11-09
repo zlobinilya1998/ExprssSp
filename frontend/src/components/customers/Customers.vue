@@ -2,6 +2,7 @@
     <div>
         <Loader v-if="loading" />
         <div class="customers" v-else-if="customers.length">
+            <div>Количество заказчиков {{  customers.length }}</div>
             <Customer v-for="item in customers" :item="item" @remove="getCustomers" />
         </div>
         <div v-else>Записи отсутствуют</div>
@@ -26,7 +27,7 @@ const { customers, loading, getCustomers } = useCustomer();
 
 .customer {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 25px;
 }
 </style>

@@ -16,21 +16,16 @@ const { products } = useProducts();
     display: flex;
     gap: 20px;
 
+    .product {
+        flex: 20%;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
 
-    // :deep(.product) {
-    //     flex: 20%;
-    //     text-align: left;
-    //     display: flex;
-    //     flex-direction: column;
-
-    //     &-description {
-    //         margin-top: auto;
-    //         display: -webkit-box;
-    //         -webkit-box-orient: vertical;
-    //         -webkit-line-clamp: 2;
-    //         overflow: hidden;
-    //         text-overflow: ellipsis;
-    //     }
-    // }
+        :deep(.product-description) {
+            margin-top: auto;
+            @include mixins.text-clamp(2)
+        }
+    }
 }
 </style>

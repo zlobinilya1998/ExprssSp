@@ -5,6 +5,13 @@ import path from 'path';
 export default () => {
   return defineConfig({
     plugins: [vue()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/styles/mixins";'
+        }
+      },
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
