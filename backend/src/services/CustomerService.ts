@@ -16,6 +16,12 @@ export class CustomerService {
         return CustomerRepository.deleteAll();
     }
 
+    static async create(dto){
+        const isExists = await CustomerRepository.getByEmail(dto.email);
+        if (isExists) throw new Error("Заказчик с такой почтой уже существует")
+        return CustomerRepository.create(dto)
+    }
+
     static async deleteById(id){
         return CustomerRepository.delete(id);
     }

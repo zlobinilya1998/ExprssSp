@@ -2,7 +2,12 @@
     <div>
         <Loader v-if="loading" />
         <div class="customers" v-else-if="customers.length">
-            <div>Количество заказчиков {{  customers.length }}</div>
+            <div class="d-flex justify-space-between">
+                <div>Количество заказчиков {{ customers.length }}</div>
+                <RouterLink :to="{ name: 'createCustomer' }">
+                    <v-btn color="primary">Создать</v-btn>
+                </RouterLink>
+            </div>
             <Customer v-for="item in customers" :item="item" @remove="getCustomers" />
         </div>
         <div v-else>Записи отсутствуют</div>
@@ -13,9 +18,7 @@
 import Customer from '@/components/customers/Customer.vue';
 import Loader from 'components/shared/Loader.vue';
 import { useCustomer } from '@/components/customers/composables/useCustomer';
-
 const { customers, loading, getCustomers } = useCustomer();
-
 </script>
 
 <style scoped>

@@ -17,6 +17,14 @@ class CustomerRepository {
         return Customer.findAll();
     }
 
+    static async getByEmail(email: string) {
+        return Customer.findOne({
+            where: {
+                email
+            }
+        })
+    }
+
     static async getById(id) {
         return Customer.findByPk(id);
     }

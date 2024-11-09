@@ -1,8 +1,9 @@
+import { Customer } from "@/models/Customer";
 import { CustomerService } from "@/services/CustomerService";
 import { onMounted, ref } from "vue";
 
 function useCustomer() {
-    const customers = ref([]);
+    const customers = ref<Customer[]>([]);
     const loading = ref(false);
     const error = ref(false);
     const getCustomers = async () => {
