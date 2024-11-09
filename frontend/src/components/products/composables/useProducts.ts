@@ -3,10 +3,19 @@ import { ProductService } from "@/services/ProductService";
 import { onMounted, ref } from "vue";
 
 function useProducts() {
+    const loading = ref(false);
     const products = ref<ProductList>([])
+    const error = ref(false);
 
     const getProducts = async () => {
-        products.value = await ProductService.getAll();
+        loading.value = true;
+        try {
+            products.value = await ProductService.getAll();
+        } catch (e) {
+            error.value = true;
+            console.error(e);
+        }
+        loading.value = false;
     }
 
     onMounted(() => {
@@ -14,7 +23,7 @@ function useProducts() {
     })
 
     return {
-        products,
+        products, loading, error,
     }
 }
 

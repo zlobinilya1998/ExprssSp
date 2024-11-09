@@ -3,10 +3,13 @@
         <RouterLink :to="{ name: 'main' }">Главная</RouterLink>
         <RouterLink :to="{ name: 'products' }">Товары</RouterLink>
         <RouterLink :to="{ name: 'customers' }">Заказчики</RouterLink>
+        <!-- <Cart/> -->
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Cart from '@/components/Cart.vue';
+</script>
 
 
 <style lang="scss" scoped>

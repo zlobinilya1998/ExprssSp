@@ -5,12 +5,17 @@
         <div class="product-price" v-text="priceText" />
         <div class="product-stock" v-text="stockText" />
         <div class="product-customer" v-text="customerText" />
+        <button class="product-purchase" :disabled="isPurchaseDisabled">в корзину</button>
     </div>
 </template>
 
 <script lang="ts" setup>
+import { useCurrency } from '@/composables/useCurrency';
 import { Product } from '@/models/Product';
 import { computed } from 'vue';
+
+const currency = useCurrency();
+
 
 interface IProps {
     item: Product,
@@ -20,6 +25,6 @@ const props = defineProps<IProps>()
 
 const stockText = computed(() => `Осталось ${props.item.stock} шт.`)
 const customerText = computed(() => `Продавец ${props.item.customer.name}`)
-const priceText = computed(() => `${props.item.price} руб.`)
-
+const priceText = computed(() => currency.formatToText(props.item.price))
+const isPurchaseDisabled = computed(() => !props.item.stock)
 </script>
