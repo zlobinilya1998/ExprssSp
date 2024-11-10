@@ -5,7 +5,7 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "types": ["vite/client","node"],
+    "types": ["vite/client", "node"],
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
@@ -26,8 +26,8 @@
       "components/*": ["src/components/*"],
       "assets/*": ["src/assets/*"],
       "services/*": ["src/services/*"],
-      "models/*": ["src/models/*"],
+      "models/*": ["src/models/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue","vite-env.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "vite-env.d.ts"]
 }
