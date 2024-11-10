@@ -2,18 +2,19 @@ version: '3.8'
 
 services:
   backend:
-    image: node:18
-    working_dir: /app
+    build:
+      context: backend
+      dockerfile: Dockerfile
     container_name: backend
     volumes:
       - ./backend:/app
       - /app/node_modules
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=development
     restart: always
-    command: sh -c "npm install && npm dev"
+    depends_on:
+      - db
+      - redis
   # frontend:
   #   build:
   #     context: frontend
@@ -31,6 +32,25 @@ services:
   #     - "3666:80"
   #   depends_on:
   #     - backend
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "${REDIS_PORT}:6379"
+    restart: unless-stopped
+volumes:
+  postgres_data:
 networks:
   default:
     name: app-network

@@ -26,11 +26,12 @@ const { customers, loading, getCustomers } = useCustomer();
     display: flex;
     flex-direction: column;
     gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .customer {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 25px;
+    display: flex;
+    gap: 20px;
 }
 </style>

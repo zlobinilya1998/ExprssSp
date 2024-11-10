@@ -1,11 +1,13 @@
 <template>
-    <div class="customer">
+    <v-card class="customer pa-2">
         <div>ID: {{ item.id }}</div>
         <div>{{ item.name }}</div>
         <div>{{ item.email }}</div>
         <div>{{ item.phone }}</div>
-        <button @click="remove">Удалить</button>
-    </div>
+        <v-btn class="ml-auto" @click="remove" icon size="x-small">
+            <v-icon color="error">mdi-delete-circle-outline</v-icon>
+        </v-btn>
+    </v-card>
 </template>
 
 <script lang="ts" setup>

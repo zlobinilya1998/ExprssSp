@@ -4,7 +4,10 @@
         <div class="order-status">Статус заказа: <span class="order-status-text" v-text="orderStatus" /></div>
         <div class="order-amount">Сумма заказа: {{ orderAmount }}</div>
         <div class="order-product" v-text="item.product.name"/>
-        <v-btn v-if="!isCompleted" class="mt-2" color="primary" @click="confirmDelivery" :loading="loading">Подтвердить получение</v-btn>
+        <v-btn v-if="!isCompleted" class="mt-2" color="success" @click="confirmDelivery" :loading="loading">
+            Подтвердить получение
+            <v-icon class="ml-2">mdi-check-circle-outline</v-icon>    
+        </v-btn>
     </div>
 </template>
 

@@ -1,10 +1,22 @@
 <template>
     <div class="create-customer-form">
         <v-form ref="form">
-            <v-text-field v-model="dto.name" placeholder="Имя" :rules="[Validation.required]" />
+            <v-text-field v-model="dto.name" placeholder="Имя" :rules="[Validation.required]">
+                <template #append-inner>
+                    <v-icon>mdi-account-edit</v-icon>
+                </template>
+            </v-text-field>
             <v-text-field v-model="dto.phone" placeholder="Телефон"
-                :rules="[Validation.required, Validation.phone.isRu]" />
-            <v-text-field v-model="dto.email" placeholder="Е-mail" :rules="[Validation.required, Validation.isEmail]" />
+                :rules="[Validation.required, Validation.phone.isRu]">
+                <template #append-inner>
+                    <v-icon>mdi-phone</v-icon>
+                </template>
+            </v-text-field>
+            <v-text-field v-model="dto.email" placeholder="Е-mail" :rules="[Validation.required, Validation.isEmail]">
+                <template #append-inner>
+                    <v-icon>mdi-email</v-icon>
+                </template>
+            </v-text-field>
             <v-btn @click="submit" block>Создать</v-btn>
         </v-form>
     </div>
