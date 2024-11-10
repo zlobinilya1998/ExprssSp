@@ -1,3 +1,4 @@
+import 'module-alias/register'; 
 import express from 'express';
 import expressAsyncErrors from 'express-async-errors';
 import bodyParser from 'body-parser';
@@ -9,7 +10,6 @@ import {sequelize} from '@/config/db';
 import { defineAssociations } from './model';
 const app = express();
 const port = 3000;
-
 
 app.use(cors())
 app.use(bodyParser.json());

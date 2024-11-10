@@ -1,9 +1,7 @@
 import Redis from '@/config/redis';
-import Customer from '@/model/customerModel';
-import Order from '@/model/orderModel';
-import { CustomerService } from 'services/CustomerService';
-import OrderService from './OrderService';
-import { ProductService } from './ProductService';
+import { CustomerService } from '@/services/CustomerService';
+import OrderService from '@/services/OrderService';
+import { ProductService } from '@/services/ProductService';
 
 abstract class Queue {
     abstract addTask(key: QueueKey, data: unknown): Promise<void>;
@@ -31,15 +29,15 @@ class RedisQueueService implements Queue {
             console.error(e);
         }
     }
-    async dequeueTask<T>(key: QueueKey): Promise<T | null> {
+    async dequeueTask(key: QueueKey) {
         let task = await Redis.rpop(key);
         if (!task) return null;
         console.log("Task processed from queue:", JSON.parse(task));
-        const data: T = JSON.parse(task);
+        const data = JSON.parse(task);
         return data;
     }
     async dequeueCustomerCreated() {
-        const customer = await this.dequeueTask<Customer>(QueueKey.customerCreated);
+        const customer = await this.dequeueTask(QueueKey.customerCreated);
         if (!customer) return;
         try {
             await CustomerService.sendWelcomeEmail(customer);
@@ -50,7 +48,7 @@ class RedisQueueService implements Queue {
     }
 
     async dequeueOrderCreated() {
-        const task = await this.dequeueTask<Order>(QueueKey.orderCreated);
+        const task = await this.dequeueTask(QueueKey.orderCreated);
         if (!task) return;
         try {
             await OrderService.sendCustomerEmail(task.order, task.product, task.customer);

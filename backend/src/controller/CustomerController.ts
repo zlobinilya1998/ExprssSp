@@ -2,7 +2,7 @@ import express from 'express';
 import { createCustomerDto } from '@/dto/CustomerDto';
 import { validate } from '@/middleware/ValidateDtoMiddleware';
 import { CustomerFacade } from '@/facade/CustomerFacade';
-import { CustomerService } from 'services/CustomerService';
+import { CustomerService } from '@/services/CustomerService';
 import { promises as fs } from 'fs';
 import path from 'path';
 

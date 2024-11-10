@@ -1,6 +1,6 @@
-import Customer from "model/customerModel";
-import Product from "model/productModel";
-import Order from "./orderModel";
+import Customer from "@/model/customerModel";
+import Product from "@/model/productModel";
+import Order from "@/model/orderModel";
 
 function defineAssociations() {
     Product.belongsTo(Customer, {

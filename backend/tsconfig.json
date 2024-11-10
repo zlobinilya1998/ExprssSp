@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "ESNext",
     "module": "commonjs",
     "noImplicitAny": false,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["*"],
+      "@/*": [
+        "./src/*"
+      ]
     },
     "outDir": "./dist",
     "esModuleInterop": true,
