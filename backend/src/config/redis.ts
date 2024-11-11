@@ -11,7 +11,7 @@ const redis = new Redis({
         const delay = Math.min(times * 50, 2000);
         console.log(`Reconnecting to Redis in ${delay} ms...`);
         return delay;
-    }
+    },
 });
 
 
