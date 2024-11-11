@@ -1,5 +1,6 @@
 <template>
     <div>
+        <v-card-title>Заказчики</v-card-title>
         <Loader v-if="loading" />
         <div class="customers" v-else-if="customers.length">
             <div class="d-flex justify-space-between">
@@ -10,15 +11,18 @@
             </div>
             <Customer v-for="item in customers" :item="item" @remove="getCustomers" />
         </div>
-        <div v-else>Записи отсутствуют</div>
+        <EmptyRecord v-else/>
     </div>
 </template>
 
 <script setup lang="ts">
 import Customer from '@/components/customers/Customer.vue';
 import Loader from 'components/shared/Loader.vue';
+import EmptyRecord from '@/components/shared/EmptyRecord.vue';
 import { useCustomer } from '@/components/customers/composables/useCustomer';
+
 const { customers, loading, getCustomers } = useCustomer();
+
 </script>
 
 <style scoped>
