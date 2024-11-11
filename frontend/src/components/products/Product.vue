@@ -20,20 +20,13 @@ import { useCurrency } from '@/composables/useCurrency';
 import { Product } from '@/models/Product';
 import { OrderService } from '@/services/OrderService';
 import { computed } from 'vue';
-
 const currency = useCurrency();
-
 
 interface IProps {
     item: Product,
 }
 
-interface IEmits {
-    (event: 'purchase'): void
-}
-
 const props = defineProps<IProps>()
-const emit = defineEmits<IEmits>()
 
 const stockText = computed(() => `Осталось ${props.item.stock} шт.`)
 const customerText = computed(() => `Продавец ${props.item.customer.name}`)
@@ -42,7 +35,7 @@ const isPurchaseDisabled = computed(() => !props.item.stock)
 
 const purchase = async () => {
     await OrderService.create(props.item);
-    emit('purchase');
+    props.item.stock -= 1;
 }
 
 </script>
