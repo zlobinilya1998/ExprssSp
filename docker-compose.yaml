@@ -12,6 +12,13 @@ services:
     depends_on:
       - db
       - redis
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
   # frontend:
   #   build:
   #     context: frontend
@@ -48,6 +55,3 @@ services:
     restart: unless-stopped
 volumes:
   postgres_data:
-networks:
-  default:
-    name: app-network

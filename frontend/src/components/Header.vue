@@ -24,7 +24,7 @@
     border-bottom: 1px solid white;
     padding-bottom: 5px;
     margin-bottom: 20px;
-
+    
     display: flex;
     gap: 20px;
 }

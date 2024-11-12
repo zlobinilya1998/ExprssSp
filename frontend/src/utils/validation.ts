@@ -13,6 +13,6 @@ export class Validation {
     static isEmail = (v: string) => {
         const regExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (regExp.test(v)) return true;
-        return 'Вветие корректный емейл'
+        return 'Введите корректный емейл'
     }
 }

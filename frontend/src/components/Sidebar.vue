@@ -15,6 +15,7 @@
                     <v-list-item prepend-icon="mdi-account" title="Заказчики" :to="{ name: 'customers' }"></v-list-item>
                     <v-list-item prepend-icon="mdi-chart-timeline" title="История заказов"
                         :to="{ name: 'orders' }"></v-list-item>
+                    <v-list-item prepend-icon="mdi-cart" title="Корзина" :to="{ name: 'cart' }" />
                 </v-list>
             </v-navigation-drawer>
         </v-layout>
