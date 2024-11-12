@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex">
         <v-card-title>Товары</v-card-title>
-        <CreateProductDialog />
+        <CreateProductDialog @create="getProducts"/>
     </div>
     <Loader v-if="loading" />
     <div v-else-if="sortedByStockProducts.length" class="products">
@@ -17,7 +17,7 @@ import EmptyRecord from '@/components/shared/EmptyRecord.vue';
 import CreateProductDialog from '@/components/dialog/CreateProductDialog.vue';
 import Loader from '@/components/shared/Loader.vue';
 
-const { loading, sortedByStockProducts } = useProducts();
+const { loading, sortedByStockProducts, getProducts } = useProducts();
 </script>
 
 <style lang="scss" scoped>

@@ -50,7 +50,8 @@ Product.init(
       references: {
         model: 'Customers', 
         key: 'id',
-      }
+      },
+      onDelete: 'CASCADE'
     }
   },
   {

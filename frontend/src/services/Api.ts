@@ -11,6 +11,7 @@ const instance = axios.create({
 const responseInterceptor = (response: AxiosResponse) => {
   if (response.data.isSuccess === false) {
     const err = new Error('Запрос завершился неуспешно: isSuccess = false')
+    alert(response.data)
     return Promise.reject(err);
   }
   return response.data;
