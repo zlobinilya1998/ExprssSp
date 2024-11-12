@@ -1,8 +1,6 @@
 <template>
-    <v-card class="product pa-4">
-        <v-card-title class="pa-0">
-            <div class="product-name" v-text="item.name" />
-        </v-card-title>
+    <v-card class="product pa-4" variant="elevated">
+        <v-card-title class="pa-0 product-name" v-text="item.name"/>
         <v-card-text class="product-description pa-0" v-text="item.description" />
         <div class="d-flex justify-space-between mt-4">
             <div class="product-customer" v-text="customerText" />

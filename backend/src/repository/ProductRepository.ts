@@ -1,31 +1,33 @@
-import Product from "@/model/productModel";
+import Product, { ProductCreationAttributes } from "@/model/productModel";
 import Customer from "@/model/customerModel";
+import ProductCategory from "@/model/productCategoryModel";
 
 class ProductRepository {
-    static async create({ name, description, price, stock, customerId }) {
-        return Product.create({
-            name,
-            description,
-            price,
-            stock,
-            customerId,
-        })
+    static async create(model: ProductCreationAttributes) {
+        return Product.create(model)
     }
     static async delete(id) {
         return Product.destroy({ where: { id } })
     }
     static async getAll() {
         return Product.findAll({
-            attributes: { exclude: ['customerId'] },
-            include: [{
-                model: Customer,
-                as: 'customer',
-                attributes: ['name', 'id'],
-            }],
+            attributes: { exclude: ['customerId', 'categoryId'] },
+            include: [
+                {
+                    model: Customer,
+                    as: 'customer',
+                    attributes: ['name', 'id'],
+                },
+                {
+                    model: ProductCategory,
+                    as: 'category',
+                    attributes: ['id','name','description']
+                }
+            ],
         });
     }
 
-    static async getById(id){
+    static async getById(id) {
         return Product.findByPk(id)
     }
 

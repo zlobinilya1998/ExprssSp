@@ -1,4 +1,5 @@
 import Customer from "@/model/customerModel";
+import Product from "@/model/productModel";
 class CustomerRepository {
     static async create({ name, phone, email }) {
         const customer = await Customer.create({
@@ -14,7 +15,15 @@ class CustomerRepository {
         })
     }
     static async getAll() {
-        return Customer.findAll();
+        return Customer.findAll({
+            include: {
+                model: Product,
+                as: 'products',
+                attributes: {
+                    exclude: ['customerId']
+                }
+            }
+        });
     }
 
     static async getByEmail(email: string) {
@@ -33,7 +42,7 @@ class CustomerRepository {
         return Customer.destroy({ truncate: true });
     }
 
-    
+
 }
 
 export default CustomerRepository;

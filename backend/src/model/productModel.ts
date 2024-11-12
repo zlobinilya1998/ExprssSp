@@ -1,16 +1,17 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '@/config';
 
-interface ProductAttributes {
+export interface ProductAttributes {
   id: number;
   customerId: number;
+  categoryId: number;
   name: string;
   price: number;
   description: string;
   stock: number;
 }
 
-interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> { }
+export interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> { }
 
 class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
   public id!: number;
@@ -19,6 +20,7 @@ class Product extends Model<ProductAttributes, ProductCreationAttributes> implem
   public description!: string;
   public stock!: number;
   public customerId!: number;
+  public categoryId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -51,7 +53,14 @@ Product.init(
         model: 'Customers', 
         key: 'id',
       },
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'ProductCategories', 
+        key: 'id',
+      },
     }
   },
   {

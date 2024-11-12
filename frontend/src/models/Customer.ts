@@ -1,3 +1,5 @@
+import { Product } from "@/models/Product";
+
 export type Customer = {
     id: number;
     name: string;
@@ -5,4 +7,5 @@ export type Customer = {
     email: string;
     createdAt: string;
     updatedAt: string;
+    products: Product[];
 }
