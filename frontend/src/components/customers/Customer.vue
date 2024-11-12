@@ -1,5 +1,5 @@
 <template>
-    <v-card class="customer pa-2">
+    <v-card class="customer pa-3" variant="tonal">
         <div>ID: {{ item.id }}</div>
         <div>{{ item.name }}</div>
         <div>{{ item.email }}</div>

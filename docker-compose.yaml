@@ -19,6 +19,8 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
+      EMAIL_USER: ${EMAIL_USER}
+      EMAIL_PASS: ${EMAIL_PASS}
   # frontend:
   #   build:
   #     context: frontend

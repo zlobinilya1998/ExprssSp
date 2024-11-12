@@ -37,7 +37,7 @@ router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     if (!id) throw new Error('No id was provided')
     const customer = await CustomerService.deleteById(id);
-    res.send(customer)
+    res.send({})
 })
 
 
