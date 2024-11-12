@@ -1,11 +1,14 @@
-import { Order } from "@/models/Order";
+import { Order, OrderStatus } from "@/models/Order";
 import { OrderService } from "@/services/OrderService";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 function useOrders() {
     const loading = ref(false);
     const orders = ref<Order[]>([])
     const error = ref(false);
+
+    const completedOrders = computed(() => orders.value.filter(el => el.status === OrderStatus.Completed))
+
 
     const getOrders = async () => {
         loading.value = true;
@@ -23,7 +26,7 @@ function useOrders() {
     })
 
     return {
-        orders, loading, error, getOrders
+        orders, completedOrders, loading, error, getOrders
     }
 }
 
