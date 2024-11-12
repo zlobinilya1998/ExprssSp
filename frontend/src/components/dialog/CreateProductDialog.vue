@@ -1,18 +1,27 @@
 <template>
     <v-dialog v-model="show" max-width="400">
         <template #activator="{ props: activatorProps }">
-            <v-btn v-bind="activatorProps" class="ml-auto" color="success">Создать товар</v-btn>
+            <v-tooltip text="Сначала добавьте заказчика" left :disabled="isCanCreateProduct" location="left center">
+                <template v-slot:activator="{ props }">
+                    <v-btn v-bind="{ ...props, ...activatorProps }" class="ml-auto" color="success">Новый товар</v-btn>
+                </template>
+            </v-tooltip>
+
+
         </template>
         <v-card class="pa-2" variant="elevated">
             <v-card-title>Cоздать товар</v-card-title>
             <v-form ref="form">
-                <v-text-field v-model="dto.name" :rules="[Validation.required]" class="mt-2" hide-details placeholder="Название" />
-                <v-text-field v-model="dto.description" :rules="[Validation.required]" class="mt-2" hide-details placeholder="Описание" />
-                <v-text-field v-model="dto.price" :rules="[Validation.required]" class="mt-2" suffix="руб." hide-details placeholder="Цена" />
-                <v-text-field v-model="dto.stock" :rules="[Validation.required]" class="mt-2" suffix="шт." hide-details placeholder="Количество на складе"
-                    hint="единиц" />
-                <v-select v-model="dto.customerId" :rules="[Validation.required]" class="mt-2" hide-details placeholder="Заказчик" :items="customers"
-                    item-title="name" item-value="id" />
+                <v-text-field v-model="dto.name" :rules="[Validation.required]" class="mt-2" hide-details
+                    placeholder="Название" />
+                <v-text-field v-model="dto.description" :rules="[Validation.required]" class="mt-2" hide-details
+                    placeholder="Описание" />
+                <v-text-field v-model="dto.price" :rules="[Validation.required]" class="mt-2" suffix="руб." hide-details
+                    placeholder="Цена" />
+                <v-text-field v-model="dto.stock" :rules="[Validation.required]" class="mt-2" suffix="шт." hide-details
+                    placeholder="Количество на складе" hint="единиц" />
+                <v-select v-model="dto.customerId" :rules="[Validation.required]" class="mt-2" hide-details
+                    placeholder="Заказчик" :items="customers" item-title="name" item-value="id" />
                 <v-btn class="mt-4" block color="success" :loading="loading" @click="createProduct">Подтвердить</v-btn>
             </v-form>
         </v-card>
@@ -20,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useCustomer } from '@/components/customers/composables/useCustomer';
 import { ProductCreateDto } from '@/types/dto/ProductDto';
 import { ProductService } from '@/services/ProductService';
@@ -35,6 +44,8 @@ const emit = defineEmits<IEmits>();
 const { customers } = useCustomer();
 const { loading, createProduct, dto, form } = useCreateProduct();
 const show = ref(false);
+
+const isCanCreateProduct = computed(() => !!customers.value.length);
 
 function useCreateProduct() {
     const loading = ref(false);
@@ -54,7 +65,7 @@ function useCreateProduct() {
         }
         loading.value = false;
     }
-    
+
     return {
         loading, dto, createProduct, form,
     }
