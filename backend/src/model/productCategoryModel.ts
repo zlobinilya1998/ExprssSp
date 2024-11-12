@@ -1,13 +1,13 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { sequelize } from '@/config';
 
-interface ProductCategoryAttributes {
+export interface ProductCategoryAttributes {
   id: number;
   name: string;
   description: string;
 }
 
-interface ProductCategoryCreationAttributes extends Optional<ProductCategoryAttributes, 'id'> { }
+export interface ProductCategoryCreationAttributes extends Optional<ProductCategoryAttributes, 'id'> { }
 
 class ProductCategory extends Model<ProductCategoryAttributes, ProductCategoryCreationAttributes> implements ProductCategoryAttributes {
   public id!: number;
