@@ -1,6 +1,9 @@
 <template>
     <v-card-title>История заказов</v-card-title>
-    <v-card-subtitle v-if="orders.length" v-text="orderCountText"/>
+    <div v-if="orders.length">
+        <v-card-subtitle v-text="orderCountText"/>
+        <v-card-subtitle v-text="completedOrderCountText"/>
+    </div>
     <EmptyRecord v-else/>
     <v-timeline side="end">
         <v-timeline-item v-for="order in orders"
@@ -17,7 +20,8 @@ import Order from '@/components/orders/Order.vue';
 import EmptyRecord from '@/components/shared/EmptyRecord.vue';
 import { OrderStatus } from '@/models/Order';
 import { computed } from 'vue';
-const { orders, getOrders } = useOrders();
+const { orders, completedOrders, getOrders } = useOrders();
 
 const orderCountText = computed(() => `Количество заказов ${orders.value.length}`)
+const completedOrderCountText = computed(() => `Выполненных заказов ${completedOrders.value.length}`)
 </script>

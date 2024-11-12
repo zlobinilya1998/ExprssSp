@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="show" max-width="400">
         <template #activator="{ props: activatorProps }">
-            <v-btn v-bind="activatorProps" class="ml-auto" color="success">Создать заказчика</v-btn>
+            <v-btn v-bind="activatorProps" class="ml-auto" color="success">Новый заказчик</v-btn>
         </template>
         <v-card class="pa-2" variant="elevated">
             <v-card-title>Создать заказчика</v-card-title>
