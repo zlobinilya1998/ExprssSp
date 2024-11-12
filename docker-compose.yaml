@@ -12,28 +12,17 @@ services:
     depends_on:
       - db
       - redis
-    environment:
-      DB_USER: ${DB_USER}
-      DB_PASS: ${DB_PASS}
-      DB_HOST: ${DB_HOST}
-      DB_DATABASE: ${DB_DATABASE}
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
-      EMAIL_USER: ${EMAIL_USER}
-      EMAIL_PASS: ${EMAIL_PASS}
+    env_file: .env
   # frontend:
   #   build:
   #     context: frontend
   #     dockerfile: Dockerfile
   #     args:
-  #       VITE_API_URL: http://194.135.25.94:3000
+  #       VITE_API_URL: db
   #   environment:
-  #     - VITE_API_URL=http://194.135.25.94:3000
+  #     - VITE_API_URL=db
   #   container_name: frontend
   #   restart: always
-  #   volumes:
-  #     - .:/app
-  #     - /app/node_modules
   #   ports:
   #     - "3666:80"
   #   depends_on:
