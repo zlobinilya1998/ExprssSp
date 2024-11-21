@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "vite": "vite",
+    "watch-tsc": "tsc --watch --noEmit",
+    "dev": "npm-run-all --parallel watch-tsc vite",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -20,6 +22,7 @@
   "devDependencies": {
     "@types/node": "^22.8.4",
     "@vitejs/plugin-vue": "^5.1.4",
+    "npm-run-all": "^4.1.5",
     "sass": "^1.80.6",
     "typescript": "~5.6.2",
     "vite": "^5.4.9",

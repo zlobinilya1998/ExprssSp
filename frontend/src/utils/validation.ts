@@ -1,5 +1,5 @@
 export class Validation {
-    static required = (v) => {
+    static required = (v: unknown) => {
         if (v) return true;
         return 'Поле является обязательным для заполнения'
     }

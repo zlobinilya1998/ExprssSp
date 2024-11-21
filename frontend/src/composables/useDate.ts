@@ -1,5 +1,5 @@
 function useDate() {
-    const options = {
+    const options: any = {
         year: 'numeric',
         month: 'long',
         day: 'numeric',

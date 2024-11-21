@@ -49,10 +49,11 @@ const isCanCreateProduct = computed(() => !!customers.value.length);
 
 function useCreateProduct() {
     const loading = ref(false);
-    const form = ref(null);
+    const form = ref<{ validate: () => ({ valid: boolean }) } | null>(null);
     const dto = ref(new ProductCreateDto());
     const createProduct = async () => {
-        const { valid } = await form?.value?.validate();
+        if (!form.value) return;
+        const { valid } = await form.value.validate();
         if (!valid) return;
         loading.value = true
         try {

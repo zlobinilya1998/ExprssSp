@@ -1,20 +1,18 @@
 version: '3.8'
 
 services:
-  # frontend:
-  #   build:
-  #     context: frontend
-  #     dockerfile: Dockerfile
-  #     args:
-  #       VITE_API_URL: db
-  #   environment:
-  #     - VITE_API_URL=db
-  #   container_name: frontend
-  #   restart: always
-  #   ports:
-  #     - "3666:80"
-  #   depends_on:
-  #     - backend
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    container_name: frontend
+    restart: always
+    ports:
+      - "3666:80"
+    depends_on:
+      - backend
   db:
     image: postgres:latest
     container_name: db
@@ -23,7 +21,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_DATABASE}
     ports:
-      - "5432:5432"
+      - "5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

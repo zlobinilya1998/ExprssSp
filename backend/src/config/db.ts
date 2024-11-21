@@ -8,6 +8,10 @@ const user: string = env.DB_USER || 'postgres'
 const pass: string = env.DB_PASS || 'postgres'
 const host: string = env.DB_HOST || 'localhost'
 const port: any = env.DB_PORT;
+
+console.log(db,user,pass,host,port);
+
+
 export const sequelize = new Sequelize(db, user, pass, {
     host,
     port: port || 5432,

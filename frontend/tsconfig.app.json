@@ -3,9 +3,17 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "skipLibCheck": true,
-    "types": ["vite/client","node"],
+    "types": [
+      "vite/client",
+      "node",
+      "vuetify",
+    ],
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
@@ -13,7 +21,6 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "preserve",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -22,12 +29,27 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "components/*": ["src/components/*"],
-      "assets/*": ["src/assets/*"],
-      "services/*": ["src/services/*"],
-      "models/*": ["src/models/*"],
+      "@/*": [
+        "src/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "assets/*": [
+        "src/assets/*"
+      ],
+      "services/*": [
+        "src/services/*"
+      ],
+      "models/*": [
+        "src/models/*"
+      ],
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue","vite-env.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite-env.d.ts"
+  ]
 }
