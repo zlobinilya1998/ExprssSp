@@ -6,7 +6,9 @@ services:
       context: frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_URL: ${VITE_API_URL}
+        VITE_API_URL: http://localhost:${BACKEND_PORT}
+    environment:
+      - VITE_API_URL=http://localhost:${BACKEND_PORT}
     container_name: frontend
     restart: always
     ports:
@@ -21,7 +23,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_DATABASE}
     ports:
-      - "5435:5432"
+      - "${DB_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -41,7 +43,7 @@ services:
       dockerfile: Dockerfile
     container_name: backend
     ports:
-      - "3000:3000"
+      - "${BACKEND_PORT}:3000"
     restart: always
     depends_on:
       db: 
