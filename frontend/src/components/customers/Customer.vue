@@ -1,10 +1,10 @@
 <template>
     <v-card class="customer pa-3" variant="tonal">
-        <div>ID: {{ item.id }}</div>
-        <div>{{ item.name }}</div>
-        <div>{{ item.email }}</div>
-        <div>{{ item.phone }}</div>
-        <v-btn class="ml-auto" @click="remove" icon size="x-small">
+        <div data-testid="id">ID: {{ item.id }}</div>
+        <div data-testid="name">{{ item.name }}</div>
+        <div data-testid="email">{{ item.email }}</div>
+        <div data-testid="phone">{{ item.phone }}</div>
+        <v-btn data-testid="remove" class="ml-auto" @click="remove" icon size="x-small">
             <v-icon color="error">mdi-delete-circle-outline</v-icon>
         </v-btn>
     </v-card>
@@ -14,11 +14,11 @@
 import { Customer } from 'models/Customer';
 import { CustomerService } from 'services/CustomerService';
 
-interface IProps {
+export interface IProps {
     item: Customer,
 }
 
-interface IEmits {
+export interface IEmits {
     (event: 'remove'): void,
 }
 
